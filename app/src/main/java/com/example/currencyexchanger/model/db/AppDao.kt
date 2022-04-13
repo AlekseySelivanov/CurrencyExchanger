@@ -20,3 +20,4 @@ interface AppDao {
     @Query("DELETE FROM ValuteInfo")
     fun delete()
 }
+//
