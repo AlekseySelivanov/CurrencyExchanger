@@ -1,7 +1,7 @@
 package com.example.currencyexchanger.presenter.valutes
 
 import com.example.currencyexchanger.model.Storage
-import com.example.currencyexchanger.model.pojo.ValuteInfo
+import com.example.currencyexchanger.model.pojo.CurrencyInfo
 import com.example.currencyexchanger.view.valutes.ValuteViewInterface
 import java.text.SimpleDateFormat
 import java.time.ZonedDateTime
@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.LinkedHashMap
 
-class ValutesPresenter(val valuteView: ValuteViewInterface): ValutesPresenterInterface, Storage.AutoDataUpdateNotificationsListener {
+class CurrencyPresenter(val valuteView: ValuteViewInterface): CurrencyPresenterInterface, Storage.AutoDataUpdateNotificationsListener {
 
     private val adapter: MyAdapter = MyAdapter(LinkedHashMap())
     private val storage: Storage = Storage.instance
@@ -26,7 +26,9 @@ class ValutesPresenter(val valuteView: ValuteViewInterface): ValutesPresenterInt
         storage.refreshData()
     }
 
-    private fun setData(data: ValuteInfo?) {
+
+
+    private fun setData(data: CurrencyInfo?) {
         data?.let {
             adapter.setData(it.valutes)
             valuteView.displayDate(

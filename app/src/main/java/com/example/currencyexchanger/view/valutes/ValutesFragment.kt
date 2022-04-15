@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencyexchanger.R
 import com.example.currencyexchanger.presenter.valutes.MyAdapter
-import com.example.currencyexchanger.presenter.valutes.ValutesPresenter
-import com.example.currencyexchanger.presenter.valutes.ValutesPresenterInterface
+import com.example.currencyexchanger.presenter.valutes.CurrencyPresenter
+import com.example.currencyexchanger.presenter.valutes.CurrencyPresenterInterface
 import kotlinx.android.synthetic.main.valutes_fragment.*
 import kotlinx.android.synthetic.main.valutes_fragment.view.*
 
 class ValutesFragment: Fragment(), ValuteViewInterface {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var presenter: ValutesPresenterInterface
+    private lateinit var presenter: CurrencyPresenterInterface
     private lateinit var lastUpdateTime: TextView
     private lateinit var dateFiled: TextView
 
@@ -40,7 +40,7 @@ class ValutesFragment: Fragment(), ValuteViewInterface {
         lastUpdateTime = view.lastUpdateTimeFiled
         dateFiled = view.date_field
 
-        presenter = ValutesPresenter(this)
+        presenter = CurrencyPresenter(this)
 
         view.refresh_btn.setOnClickListener { presenter.refreshData() }
     }

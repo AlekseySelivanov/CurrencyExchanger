@@ -7,7 +7,7 @@ import androidx.room.Room
 import com.example.currencyexchanger.App
 import com.example.currencyexchanger.model.db.AppDB
 import com.example.currencyexchanger.model.network.NetworkService
-import com.example.currencyexchanger.model.pojo.ValuteInfo
+import com.example.currencyexchanger.model.pojo.CurrencyInfo
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
@@ -15,7 +15,7 @@ import java.util.*
 
 class Storage private constructor(context: Context){
 
-    private var storage: ValuteInfo? = null
+    private var storage: CurrencyInfo? = null
     private val timer: Timer = Timer(Runnable { refreshData() }, 5 * 60000)
     private val listeners: LinkedList<AutoDataUpdateNotificationsListener> = LinkedList()
     private val localDBConnection: AppDB =
@@ -35,7 +35,7 @@ class Storage private constructor(context: Context){
         fun onStorageAutomaticallyUpdated()
     }
 
-    fun getData(): ValuteInfo {
+    fun getData(): CurrencyInfo {
         if (storage == null) {
             val deferred = GlobalScope.async {
                 val localData =

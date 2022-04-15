@@ -4,7 +4,7 @@ import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
 @Entity
-data class Valute(
+data class Currency(
     @SerializedName("CharCode")
     var charCode: String,
     @SerializedName("Nominal")

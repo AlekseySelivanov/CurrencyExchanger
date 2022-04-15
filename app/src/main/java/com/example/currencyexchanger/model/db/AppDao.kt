@@ -4,20 +4,19 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.currencyexchanger.model.pojo.ValuteInfo
+import com.example.currencyexchanger.model.pojo.CurrencyInfo
 
 @Dao
 interface AppDao {
-    @Query("SELECT * FROM ValuteInfo")
-    fun getValuteInfo(): ValuteInfo?
+    @Query("SELECT * FROM CurrencyInfo")
+    fun getValuteInfo(): CurrencyInfo?
 
     @Insert
-    fun insert(valuteInfo: ValuteInfo)
+    fun insert(currencyInfo: CurrencyInfo)
 
     @Update
-    fun update(valuteInfo: ValuteInfo)
+    fun update(currencyInfo: CurrencyInfo)
 
-    @Query("DELETE FROM ValuteInfo")
+    @Query("DELETE FROM CurrencyInfo")
     fun delete()
 }
-///

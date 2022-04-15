@@ -1,5 +1,5 @@
 package com.example.currencyexchanger.presenter.valutes
 
-interface ValutesPresenterInterface {
+interface CurrencyPresenterInterface {
     fun refreshData()
 }

@@ -1,10 +1,9 @@
 package com.example.currencyexchanger.presenter.converter
 
-import android.util.Log
 import com.example.currencyexchanger.R
 import com.example.currencyexchanger.model.Storage
-import com.example.currencyexchanger.model.pojo.Valute
-import com.example.currencyexchanger.model.pojo.ValuteInfo
+import com.example.currencyexchanger.model.pojo.Currency
+import com.example.currencyexchanger.model.pojo.CurrencyInfo
 import com.example.currencyexchanger.view.converter.ConverterViewInterface
 import kotlinx.coroutines.runBlocking
 import java.time.ZonedDateTime
@@ -24,10 +23,10 @@ class ConverterPresenter(val view: ConverterViewInterface): ConverterPresenterIn
         displayDate()
     }
 
-    private fun getStorageData(): ValuteInfo {
+    private fun getStorageData(): CurrencyInfo {
         val data = module.getData().getCopy()
         if (!data.valutes.containsKey("RUR")) {
-            data.valutes["RUR"] = Valute("RUR", 1, "Российский рубль", 1.0)
+            data.valutes["RUR"] = Currency("RUR", 1, "Российский рубль", 1.0)
         }
         return data
     }
@@ -87,14 +86,14 @@ class ConverterPresenter(val view: ConverterViewInterface): ConverterPresenterIn
         return convert(valute1, valute2, convertValue)
     }
 
-    private fun convert(valuteFrom: Valute, valuteTo: Valute, convertValue: Double) =
-        (valuteFrom.value / valuteFrom.nominal / valuteTo.value) * convertValue
+    private fun convert(currencyFrom: Currency, currencyTo: Currency, convertValue: Double) =
+        (currencyFrom.value / currencyFrom.nominal / currencyTo.value) * convertValue
 
     override fun onStorageAutomaticallyUpdated() {
         displayDate()
     }
 
-    private fun displayDate() {
+     fun displayDate() {
         val date = getStorageData().date
         view.displayDate(ZonedDateTime.parse(date).format(dateFormatter))
     }
