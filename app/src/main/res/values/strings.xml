@@ -12,4 +12,5 @@
     <string name="want_to_have">Хочу приобрести</string>
     <string name="already_have">У меня есть</string>
     <string name="current_date">Курс актуален на:</string>
+    <string name="refresh">Обновить</string>
 </resources>
