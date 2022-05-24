@@ -12,12 +12,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.currencyexchanger.R
+import com.example.currencyexchanger.databinding.ConverterFragmentBinding
 import com.example.currencyexchanger.presenter.converter.ConverterPresenter
 import com.example.currencyexchanger.presenter.converter.ConverterPresenterInterface
-import kotlinx.android.synthetic.main.converter_fragment.view.*
-
 
 class ConverterFragment: Fragment(), ConverterViewInterface {
+
+    private var _binding: ConverterFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var valutesFrom: Spinner
     private lateinit var valutesTo: Spinner
@@ -39,17 +41,18 @@ class ConverterFragment: Fragment(), ConverterViewInterface {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.converter_fragment, container, false)
+        _binding = ConverterFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        valutesFrom = view.valutes_from
-        valutesTo = view.valutes_to
-        numToConvert = view.num_to_convert
-        convertedNum = view.num_converted
-        rateFrom = view.rate_from
-        rateTo = view.rate_to
-        date = view.date
+        valutesFrom = binding.valutesFrom
+        valutesTo = binding.valutesTo
+        numToConvert = binding.numToConvert
+        convertedNum = binding.numConverted
+        rateFrom = binding.rateFrom
+        rateTo = binding.rateTo
+        date = binding.date
 
         presenter = ConverterPresenter(this)
         valutesFrom.onItemSelectedListener = onSpinnerItemSelected()
@@ -62,7 +65,7 @@ class ConverterFragment: Fragment(), ConverterViewInterface {
 
         imm = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
 
-        view.reverse_btn.setOnClickListener {
+        binding.reverseBtn.setOnClickListener {
             val t = valutesFrom.selectedItemPosition
             setSelectionToSpinnerFrom(valutesTo.selectedItemPosition)
             setSelectionToSpinnerTo(t)

@@ -10,14 +10,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.currencyexchanger.R
+import com.example.currencyexchanger.databinding.ValutesFragmentBinding
 import com.example.currencyexchanger.presenter.valutes.MyAdapter
 import com.example.currencyexchanger.presenter.valutes.CurrencyPresenter
 import com.example.currencyexchanger.presenter.valutes.CurrencyPresenterInterface
-import kotlinx.android.synthetic.main.valutes_fragment.*
-import kotlinx.android.synthetic.main.valutes_fragment.view.*
 
 class ValutesFragment: Fragment(), ValuteViewInterface {
+
+    private var _binding: ValutesFragmentBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var presenter: CurrencyPresenterInterface
@@ -29,20 +30,21 @@ class ValutesFragment: Fragment(), ValuteViewInterface {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.valutes_fragment, container, false)
+        _binding = ValutesFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = recycler_view
+        recyclerView = binding.recyclerView
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        lastUpdateTime = view.lastUpdateTimeFiled
-        dateFiled = view.date_field
+        lastUpdateTime = binding.lastUpdateTimeFiled
+        dateFiled = binding.dateField
 
         presenter = CurrencyPresenter(this)
 
-        view.refresh_btn.setOnClickListener { presenter.refreshData() }
+        binding.refreshBtn.setOnClickListener { presenter.refreshData() }
     }
 
     override fun getActivityLifecycle(): Lifecycle {
